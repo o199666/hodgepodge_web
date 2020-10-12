@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dp.hodgepodge.dao.NewsDao">
+    <resultMap id="BaseResultMap" type="com.dp.hodgepodge.entity.NewsEntity">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <baseResult column="news_title" jdbcType="VARCHAR" property="news_title" />
+        <baseResult column="news_links" jdbcType="VARCHAR" property="news_links" />
+        <baseResult column="news_plays" jdbcType="INTEGER" property="news_plays" />
+        <baseResult column="news_type_id" jdbcType="INTEGER" property="news_type_id" />
+        <baseResult column="news_rhesis_ch" jdbcType="VARCHAR" property="news_rhesis_ch" />
+        <baseResult column="news_rhesis_en" jdbcType="VARCHAR" property="news_rhesis_en" />
+        <baseResult column="news_author" jdbcType="VARCHAR" property="news_author" />
+        <baseResult column="news_production" jdbcType="VARCHAR" property="news_production" />
+        <baseResult column="news_img" jdbcType="VARCHAR" property="news_img" />
+        <baseResult column="news_variety" jdbcType="INTEGER" property="news_variety" />
+        <baseResult column="news_lives" jdbcType="INTEGER" property="news_lives" />
+        <baseResult column="news_collects" jdbcType="INTEGER" property="news_collects" />
+    </resultMap>
+
+
+    <select id="queryNewsAll"  resultMap="BaseResultMap">
+        select *  from news
+    </select>
+</mapper>
