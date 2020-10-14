@@ -30,7 +30,7 @@ public class UserServicelmpl implements UserService {
      * @return
      */
     @Override
-    public int updateUserByPwd(UserEntivity userEntivity) {
+    public UserEntivity updateUserByPwd(UserEntivity userEntivity) {
         return userDao.updateUser(userEntivity);
     }
 

@@ -31,7 +31,7 @@
     </select>
     <!-- 修改用户信息 UPDATE table_name SET field1=new-value1, field2=new-value2
 [WHERE Clause] -->
-    <select id="updateUser" resultType="int">
-    update count(*)  set  user user_pwd=#{use_pwd} where user_phone=#{user_phone}
+    <select id="updateUser" resultType="com.dp.hodgepodge.entity.UserEntivity">
+    update user set  user_pwd=#{user_pwd} where user_phone=#{user_phone}
  </select>
 </mapper>

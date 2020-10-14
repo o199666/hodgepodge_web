@@ -26,7 +26,7 @@ public interface UserService {
      * 修改，找回密码
      * @return
      */
-    int updateUserByPwd(UserEntivity userEntivity);
+    UserEntivity updateUserByPwd(UserEntivity userEntivity);
 
     /**
      * 查看是否存在

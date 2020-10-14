@@ -11,7 +11,7 @@ public interface UserDao {
      * @param user
      * @return
      */
-    int updateUser(UserEntivity user);
+    UserEntivity updateUser(UserEntivity user);
 
     /**
      * 用户登录

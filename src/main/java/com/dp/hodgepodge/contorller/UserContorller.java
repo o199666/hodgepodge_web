@@ -80,14 +80,14 @@ public class UserContorller {
         int count = userService.queryUserByPhone(user.getUser_phone());
         if (count == 0) {
             //用户不存在
+            return resultUtil.result(CommonConfig.RESULT_ERROR_CODE, "手机号码不存在！",null);
         } else {
             //前端短信验证通过，
-            int userEntivity = userService.updateUserByPwd(user);
-            if (userEntivity == 1) {
-                return resultUtil.result(CommonConfig.RESULT_SUCCSS_CODE, "密码修改成功，请重新登录",null);
-            }
+            UserEntivity userEntivity = userService.updateUserByPwd(user);
+//            if (userEntivity == 1) {
+                return resultUtil.result(CommonConfig.RESULT_SUCCSS_CODE, "密码修改成功，请重新登录",userEntivity);
+//            }
         }
-           return resultUtil.result(CommonConfig.RESULT_ERROR_CODE, "密码修改错误！",null);
 
     }
 
