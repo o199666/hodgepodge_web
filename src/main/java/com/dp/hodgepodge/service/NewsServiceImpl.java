@@ -2,7 +2,6 @@ package com.dp.hodgepodge.service;
 
 import com.dp.hodgepodge.dao.NewsDao;
 import com.dp.hodgepodge.entity.NewsEntity;
-import com.dp.hodgepodge.utils.page.PageRequest;
 import com.dp.hodgepodge.utils.page.PageResult;
 import com.dp.hodgepodge.utils.page.PageUtils;
 import com.github.pagehelper.PageHelper;
@@ -23,7 +22,6 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsDao newsDao;
-
     @Override
     public PageResult queryAllNews(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);

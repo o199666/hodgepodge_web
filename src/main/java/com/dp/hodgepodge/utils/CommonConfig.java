@@ -15,9 +15,12 @@ public class CommonConfig {
     static String path = getIp();
 
     public static final String Image = "http://" + path + ":8080/news/";
+    public static final int RESULT_SUCCSS_CODE = 1001;//成功
+    public static final int RESULT_ERROR_CODE = 1000;//失败
 
     /**
      * 获取当前项目ID地址
+     *
      * @return
      */
     public static String getIp() {

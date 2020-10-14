@@ -5,10 +5,10 @@ package com.dp.hodgepodge.utils;
  */
 public class ResultUtil {
     //当正确时返回的值
-    public BaseResult success(Object data) {
+    public BaseResult result(int code,String msg,Object data) {
         BaseResult baseResult = new BaseResult();
-        baseResult.setCode(0);
-        baseResult.setMsg("OK");
+        baseResult.setCode(code);
+        baseResult.setMsg(msg);
         baseResult.setData(data);
         return baseResult;
     }
