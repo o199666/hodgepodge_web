@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 public interface UserDao {
     /**
      * 修改用户
+     * http://localhost:8080/updateUserPwd  body=
+     *  {
+     *     "user_phone":"18177331",
+     *     "user_pwd":"123aa"
+     *  }
      *
      * @param user
      * @return

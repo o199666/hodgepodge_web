@@ -18,6 +18,43 @@ public class NewsEntity implements Serializable {
     private int news_variety;//类型，0
     private int news_lives;//点赞
     private int news_collects;//收藏数
+    private String news_music_name;//音乐的名字
+    private String news_musci_author;//歌手
+    private String news_musci_path;//路径
+    private String news_time;//文章时间
+
+
+    public String getNews_music_name() {
+        return news_music_name;
+    }
+
+    public void setNews_music_name(String news_music_name) {
+        this.news_music_name = news_music_name;
+    }
+
+    public String getNews_musci_author() {
+        return news_musci_author;
+    }
+
+    public void setNews_musci_author(String news_musci_author) {
+        this.news_musci_author = news_musci_author;
+    }
+
+    public String getNews_musci_path() {
+        return news_musci_path;
+    }
+
+    public void setNews_musci_path(String news_musci_path) {
+        this.news_musci_path = news_musci_path;
+    }
+
+    public String getNews_time() {
+        return news_time;
+    }
+
+    public void setNews_time(String news_time) {
+        this.news_time = news_time;
+    }
 
     public int getNews_id() {
         return id;

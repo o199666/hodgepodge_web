@@ -2,6 +2,7 @@ package com.dp.hodgepodge.service;
 
 import com.dp.hodgepodge.dao.NewsDao;
 import com.dp.hodgepodge.entity.NewsEntity;
+import com.dp.hodgepodge.entity.NewsTypeEntity;
 import com.dp.hodgepodge.utils.page.PageResult;
 import com.dp.hodgepodge.utils.page.PageUtils;
 import com.github.pagehelper.PageHelper;
@@ -22,11 +23,36 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsDao newsDao;
+
     @Override
     public PageResult queryAllNews(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<NewsEntity> news = newsDao.queryNewsAll();
         //返回包裹的的分页
+        return PageUtils.getPageResult(new PageInfo(news));
+    }
+
+    /**
+     * 查询全部类型
+     *
+     * @return
+     */
+    @Override
+    public List<NewsTypeEntity> queryNewsType() {
+        return newsDao.queryNewsType();
+    }
+
+    /**
+     * 根据类型ID 查询
+     *
+     * @param
+     * @param
+     * @return
+     */
+    @Override
+    public PageResult queryNewsByTypeId(int typeId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<NewsEntity> news = newsDao.queryNewsByTypeId(typeId);
         return PageUtils.getPageResult(new PageInfo(news));
     }
 }

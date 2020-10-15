@@ -15,9 +15,27 @@
         <result column="news_variety" jdbcType="INTEGER" property="news_variety"/>
         <result column="news_lives" jdbcType="INTEGER" property="news_lives"/>
         <result column="news_collects" jdbcType="INTEGER" property="news_collects"/>
+        <result column="news_musci_path" jdbcType="VARCHAR" property="news_musci_path"/>
+        <result column="news_musci_author" jdbcType="VARCHAR" property="news_musci_author"/>
+        <result column="news_music_name" jdbcType="VARCHAR" property="news_music_name"/>
+        <result column="news_time" jdbcType="VARCHAR" property="news_time"/>
+    </resultMap>
+
+<!--    类型-->
+    <resultMap id="NewsTypeEntity" type="com.dp.hodgepodge.entity.NewsTypeEntity">
+        <id column="news_type_id" jdbcType="INTEGER" property="news_type_id"/>
+        <result column="news_type_name" jdbcType="VARCHAR" property="news_type_name"/>
+        <result column="news_type_desc" jdbcType="VARCHAR" property="news_type_desc"/>
     </resultMap>
 
     <select id="queryNewsAll" resultMap="NewsEntity">
         select *  from news
+    </select>
+    <select id="queryNewsType" resultMap="NewsTypeEntity">
+        select *  from news_type
+    </select>
+<!--    根据Id 查询-->
+    <select id="queryNewsByTypeId" resultMap="NewsEntity">
+                select *  from news where news_type_id=#{news_type_id}
     </select>
 </mapper>
