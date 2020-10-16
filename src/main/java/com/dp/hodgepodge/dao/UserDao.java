@@ -1,6 +1,7 @@
 package com.dp.hodgepodge.dao;
 
 import com.dp.hodgepodge.entity.UserEntivity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -12,20 +13,26 @@ public interface UserDao {
      *     "user_phone":"18177331",
      *     "user_pwd":"123aa"
      *  }
-     *
-     * @param user
+     */
+
+
+    int updateUserPwd(@Param("phone") String phone,@Param("pwd")  String pwd,@Param("newPwd")  String newPwd);
+    /**
+     *  如果一个参数，可以不加注释，多个参数需要加注释 不然mapper不识别
+     * @param phone
+     * @param pwd
      * @return
      */
-    UserEntivity updateUser(UserEntivity user);
-
+    int checkPhoneOrPwd(@Param("phone") String phone,@Param("pwd")  String pwd);
     /**
      * 用户登录
      *
      * @param phone
      * @return
      */
+    UserEntivity userLogin(@Param("phone") String phone,@Param("pwd") String pwd);
 
-    UserEntivity userLogin(String phone);
+
 
     /**
      * 用户注册
@@ -38,5 +45,5 @@ public interface UserDao {
     /**
      * 查看是否已经注册
      */
-    int queryUserByPhone(String phone);
+    int queryUserByPhone(@Param("phone") String phone);
 }
