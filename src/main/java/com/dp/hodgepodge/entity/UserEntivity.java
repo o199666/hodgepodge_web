@@ -12,6 +12,7 @@ public class UserEntivity implements Serializable {
     private String userSex;
     private String userDesc;
     private int userState; //状态，0 正常 1 封号
+    private String userToken; //状态，0 正常 1 封号
 
     @Override
     public String toString() {
@@ -26,6 +27,14 @@ public class UserEntivity implements Serializable {
                 ", userDesc='" + userDesc + '\'' +
                 ", userState=" + userState +
                 '}';
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 
     public int getUserId() {

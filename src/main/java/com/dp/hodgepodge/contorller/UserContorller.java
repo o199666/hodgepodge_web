@@ -5,10 +5,15 @@ import com.dp.hodgepodge.entity.request.UserBean;
 import com.dp.hodgepodge.service.UserServicelmpl;
 import com.dp.hodgepodge.utils.BaseResult;
 import com.dp.hodgepodge.utils.CommonConfig;
+import com.dp.hodgepodge.utils.JavaWebToken;
 import com.dp.hodgepodge.utils.ResultUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.transform.Result;
+import java.util.HashMap;
+import java.util.Map;
 
 @MapperScan("com.dp.hodgepodge.dao")
 @RestController
@@ -33,6 +38,7 @@ public class UserContorller {
      */
     @RequestMapping(value = "/userReg")
     public BaseResult userReg(@RequestBody UserEntivity user) {
+
         System.out.println(user.toString());
         //todo先查询一下。判断有无已经注册
         int result = userService.queryUserByPhone(user.getUserPhone());
@@ -82,9 +88,16 @@ public class UserContorller {
             //说明用户没注册
             return resultUtil.result(CommonConfig.RESULT_ERROR_CODE, "您没有注册！", null);
         } else {
+            Map<String, Object> map = new HashMap<>();
+            map.put("user_phone", user.getUserPhone());
+            map.put("user_pwd", user.getUserPwd());
+            String token = JavaWebToken.createJavaWebToken(map);
+            System.out.println(token);
+            userService.updateToken(token, user.getUserPhone(), user.getUserPwd());
 //            说明用户注册了
             UserEntivity userEntivity = userService.userLogin(user.getUserPhone(), user.getUserPwd());
             if (user.getUserPhone().equals(userEntivity.getUserPhone()) && user.getUserPwd().equals(userEntivity.getUserPwd())) {
+                //得到token 存在数据库，并返回
                 //账号密码正确，return
                 return resultUtil.result(CommonConfig.RESULT_SUCCSS_CODE, "登录成功！", userEntivity);
             } else {
@@ -101,8 +114,15 @@ public class UserContorller {
      * "user_pwd":"1877qwe33"
      * }
      */
+
+
     @RequestMapping(value = "/updateUserPwd")
-    public BaseResult updateUserPwd(@RequestBody UserBean user) {
+    public BaseResult updateUserPwd(@RequestHeader("user_token") String token, @RequestBody UserBean user) {
+        System.out.println(token);
+ //检测token
+        if (userService.selectToken(token) != 1) {
+            return resultUtil.result(CommonConfig.RESULT_NOLOGIN_CODE, "当前用户没有登录！", null);
+        }
         //加这一层是为了 检测是否存在。
         int count = userService.checkPhoneOrPwd(user);
         System.out.println(user.toString());
@@ -123,4 +143,7 @@ public class UserContorller {
         }
     }
 
+
+
 }
+

@@ -11,6 +11,7 @@
         <result column="user_sex" jdbcType="VARCHAR" property="userSex"/>
         <result column="user_desc" jdbcType="VARCHAR" property="userDesc"/>
         <result column="user_state" jdbcType="INTEGER" property="userState"/>
+        <result column="user_token" jdbcType="INTEGER" property="userToken"/>
     </resultMap>
     <!--  注册 -->
     <insert id="userReg" parameterType="com.dp.hodgepodge.entity.UserEntivity">
@@ -30,6 +31,8 @@
         select *  from user where user_phone=#{phone} and user_pwd=#{pwd}
     </select>
 
+
+
     <!--  修改密码之前检查密码查询-->
     <select id="checkPhoneOrPwd" resultType="int" >
         select  count(*)  from user where user_phone=#{phone} and user_pwd=#{pwd}
@@ -39,4 +42,13 @@
     <update id="updateUserPwd" >
             update user set  user_pwd=#{newPwd} where user_phone=#{phone} and user_pwd=#{pwd}
     </update>
+<!-- 更新token-->
+    <update id="updateToken">
+          update user set  user_token=#{token} where user_phone=#{phone} and user_pwd=#{pwd}
+    </update>
+<!--  验证token-->
+    <select id="selectToken" resultType="int">
+         select  count(*)  from user where user_token=#{token}
+    </select>
+
 </mapper>

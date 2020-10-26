@@ -4,6 +4,7 @@ import com.dp.hodgepodge.dao.UserDao;
 import com.dp.hodgepodge.entity.UserEntivity;
 import com.dp.hodgepodge.entity.request.UserBean;
 import com.dp.hodgepodge.utils.ResultUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class UserServicelmpl {
     private UserDao userDao;
     //结果工具集
     ResultUtil resultUtil = new ResultUtil();
+
     public int userReg(UserEntivity user) {
         return userDao.userReg(user);
     }
@@ -27,6 +29,10 @@ public class UserServicelmpl {
         return userDao.userLogin(phone, pwd);
     }
 
+    public int updateToken(String token, String phone, String pwd) {
+        return userDao.updateToken(token, phone, pwd);
+    }
+
     /**
      * 修改用户密码
      *
@@ -34,10 +40,10 @@ public class UserServicelmpl {
      * @return
      */
     public int updateUserPwd(String phone, String pwd, String newPwd) {
-        if (newPwd.isEmpty()){
+        if (newPwd.isEmpty()) {
             return userDao.updateUserPwd(phone, pwd, newPwd);
 
-        }else{
+        } else {
             return userDao.updateUserPwd(phone, pwd, newPwd);
 
         }
@@ -45,11 +51,22 @@ public class UserServicelmpl {
 
     /**
      * 修改密码检测
+     *
      * @param user
      * @return
      */
     public int checkPhoneOrPwd(UserBean user) {
         return userDao.checkPhoneOrPwd(user.getUserPhone(), user.getUserPwd());
+    }
+
+    /**
+     * 查询 是否带有token
+     *
+     * @param token
+     * @return
+     */
+    public int selectToken(@Param("token") String token) {
+        return userDao.selectToken(token);
     }
 
     /**

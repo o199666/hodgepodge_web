@@ -20,7 +20,7 @@ public class JavaWebToken {
     private static Key getKeyInstance() {
         //We will sign our JavaWebToken with our ApiKey secret
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("abcdefghijkl");//加密，里面的字符串可自行定义
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("cwjasdasdasd");//加密，里面的字符串可自行定义
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
         return signingKey;
     }

@@ -3,6 +3,7 @@ package com.dp.hodgepodge.contorller;
 import com.dp.hodgepodge.entity.UserEntivity;
 import com.dp.hodgepodge.entity.request.PageBean;
 import com.dp.hodgepodge.service.NewsServiceImpl;
+import com.dp.hodgepodge.service.UserServicelmpl;
 import com.dp.hodgepodge.utils.BaseResult;
 import com.dp.hodgepodge.utils.CommonConfig;
 import com.dp.hodgepodge.utils.ResultUtil;
@@ -20,6 +21,8 @@ import java.util.Map;
 public class NewsContorller {
     @Autowired
     private NewsServiceImpl newsService;
+    @Autowired
+    private UserServicelmpl userService;
     ResultUtil resultUtil = new ResultUtil();
 
     @RequestMapping(value = "/queryNewsAll", method = RequestMethod.GET)
@@ -32,7 +35,10 @@ public class NewsContorller {
      * @return
      */
     @RequestMapping(value = "/queryNewsType")
-    public BaseResult queryNewsType() {
+    public BaseResult queryNewsType(@RequestHeader("user_token") String token) {
+        if (userService.selectToken(token) != 1) {
+            return resultUtil.result(CommonConfig.RESULT_NOLOGIN_CODE, "当前用户没有登录！", null);
+        }
         return resultUtil.result(CommonConfig.RESULT_SUCCSS_CODE, "OK", newsService.queryNewsType());
     }
 
@@ -43,7 +49,11 @@ public class NewsContorller {
      * @return
      */
     @RequestMapping(value = "/queryNewsByTypeId")
-    public BaseResult queryNewsByTypeId(@RequestBody PageBean pageBean) {
+    public BaseResult queryNewsByTypeId(@RequestHeader("user_token") String token,@RequestBody PageBean pageBean) {
+        //检测token
+        if (userService.selectToken(token) != 1) {
+            return resultUtil.result(CommonConfig.RESULT_NOLOGIN_CODE, "当前用户没有登录！", null);
+        }
         return resultUtil.result(CommonConfig.RESULT_SUCCSS_CODE, "OK", newsService.queryNewsByTypeId(pageBean.getTypeId(), pageBean.getPageNum(), pageBean.getPageSize()));
     }
 
